@@ -1428,14 +1428,14 @@ namespace JyGame
 				num8 += CommonSettings.ZHOUMU_DEFENCE_ADD * (double)(RuntimeData.Instance.Round - 1);
 			}
 			double attackLow = (double)skill.Power * (2.0 + (double)num5 / 200.0) * 2.5 * (4.0 + (double)role.AttributesFinal["bili"] / 120.0) * (1.0 + num6);
-			double attckHigh = (double)skill.Power * (2.0 + (double)num5 / 200.0) * 2.5 * (4.0 + (double)role.AttributesFinal["bili"] / 120.0) * (1.0 + num6) * (double)(1f + equippedInternalSkill.Attack);
+			double attackHigh = (double)skill.Power * (2.0 + (double)num5 / 200.0) * 2.5 * (4.0 + (double)role.AttributesFinal["bili"] / 120.0) * (1.0 + num6) * (double)(1f + equippedInternalSkill.Attack);
 			double critical_chacne = (double)role.AttributesFinal["fuyuan"] / 50.0 / 20.0 * (double)(1f + equippedInternalSkill.Critical) * (1.0 + num6);
 			critical_chacne += (double)role.CriticalProbabilityAdd();
 			double defence = 150.0 + (10.0 + (double)role2.AttributesFinal["dingli"] / 40.0 + (double)role2.AttributesFinal["gengu"] / 70.0) * 8.0 * (double)(1f + equippedInternalSkill2.Defence);
 			if (sourceSprite.Team == 2)
 			{
 				attackLow *= num7;
-				attckHigh *= num7;
+				attackHigh *= num7;
 			}
 			if (targetSprite.Team == 2)
 			{
@@ -1452,7 +1452,7 @@ namespace JyGame
 				{
 					attackResult.AddCastInfo(sourceSprite, new string[2] { "来自异世的威力！", "天外飞仙！" }, 0.2f);
 					attackLow *= 2.0;
-					attckHigh *= 2.0;
+					attackHigh *= 2.0;
 					critical_chacne *= 2.0;
 				}
 			}
@@ -1481,7 +1481,7 @@ namespace JyGame
 							attackResult.AddCastInfo(sprite, "夫妻同心！");
 						}
 						attackLow *= Tools.GetRandom(1.2, 2.0);
-						attckHigh *= Tools.GetRandom(1.2, 2.0);
+						attackHigh *= Tools.GetRandom(1.2, 2.0);
 						break;
 					}
 				}
@@ -1522,7 +1522,7 @@ namespace JyGame
 			{
 				attackResult.AddCastInfo(sourceSprite, new string[2] { "杀杀杀！", "跟我来！" }, 0.2f);
 				attackLow *= 1.5;
-				attckHigh *= 1.5;
+				attackHigh *= 1.5;
 				critical_chacne *= 1.5;
 			}
 			if (role.HasTalent("不稳定的六脉神剑") && skill.Name.Contains("六脉神剑"))
@@ -1533,13 +1533,13 @@ namespace JyGame
 				{
 					attackLow = 0.0;
 				}
-				attckHigh *= 1.5;
+				attackHigh *= 1.5;
 			}
 			if (role.HasTalent("好色") && role2.Female)
 			{
 				attackResult.AddCastInfo(sourceSprite, new string[3] { "花姑娘，大大的！", "哟西，花姑娘 ", "美女，我所欲也" }, 0.15f);
 				attackLow *= 1.2;
-				attckHigh *= 1.2;
+				attackHigh *= 1.2;
 			}
 			if (role.Female && role2.HasTalent("好色"))
 			{
@@ -1558,7 +1558,7 @@ namespace JyGame
 				}
 				critical_chacne += 0.25;
 				attackLow *= 1.3;
-				attckHigh *= 1.3;
+				attackHigh *= 1.3;
 			}
 			if (role.HasTalent("雪山飞狐") && skill.Name.Contains("胡家刀法"))
 			{
@@ -1569,7 +1569,7 @@ namespace JyGame
 			{
 				double num15 = (double)role2.Attributes["hp"] / (double)role2.Attributes["maxhp"];
 				attackLow *= 1.0 + 0.5 * (1.0 - num15);
-				attckHigh *= 1.0 + 0.5 * (1.0 - num15);
+				attackHigh *= 1.0 + 0.5 * (1.0 - num15);
 			}
 			if (role.HasTalent("孤独求败") && Tools.ProbabilityTest(0.3))
 			{
@@ -1586,7 +1586,7 @@ namespace JyGame
 			{
 				attackResult.AddCastInfo(sourceSprite, new string[6] { "意体相随！", "四两拨千斤！", "以柔克刚！", "左右野马分鬃", "白鹤晾翅", "左揽雀尾" }, 0.1f);
 				attackLow *= 1.2;
-				attckHigh *= 1.2;
+				attackHigh *= 1.2;
 				critical_chacne += 0.15;
 			}
 			if (role2.HasTalent("太极宗师") && role2.GetEquippedInternalSkill().Name.Contains("太极"))
@@ -1610,20 +1610,20 @@ namespace JyGame
 				{
 					attackResult.AddCastInfo(sourceSprite, new string[2] { "让你们见识见识蛤蟆功的威力！", "呱！！！尝尝我蛤蟆功的厉害。" }, 0.1f);
 					attackLow += 400.0;
-					attckHigh += 400.0;
+					attackHigh += 400.0;
 				}
 				else if (role.GetEquippedInternalSkill().Name.Contains("蛤蟆功"))
 				{
 					attackResult.AddCastInfo(sourceSprite, new string[1] { "呱！！" }, 0.1f);
 					attackLow += 250.0;
-					attckHigh += 250.0;
+					attackHigh += 250.0;
 				}
 			}
 			if (role.HasTalent("猎人") && role2.Animal)
 			{
 				attackResult.AddCastInfo(sourceSprite, new string[2] { "颤抖吧，猎物们！", "我，是打猎的能手！" }, 0.1f);
 				attackLow *= 1.5;
-				attckHigh *= 1.5;
+				attackHigh *= 1.5;
 			}
 			if (role2.HasTalent("金钟罩") && Tools.ProbabilityTest(0.25))
 			{
@@ -1640,7 +1640,7 @@ namespace JyGame
 				attackResult.AddCastInfo(sourceSprite, new string[2] { "老子要发飙啦！", "怒火，将会焚烧一切！" }, 0.1f);
 				int balls = sourceSprite.Balls;
 				attackLow *= 1.0 + (double)balls * 0.1;
-				attckHigh *= 1.0 + (double)balls * 0.1;
+				attackHigh *= 1.0 + (double)balls * 0.1;
 			}
 			if (role2.HasTalent("暴躁"))
 			{
@@ -1651,7 +1651,7 @@ namespace JyGame
 				attackResult.AddCastInfo(sourceSprite, new string[2] { "你漫天要价,我落地还钱", "九出十三归!" }, 0.1f);
 				critical_chacne *= Tools.GetRandom(1.0, 2.0);
 				attackLow *= Tools.GetRandom(1.0, 1.5);
-				attckHigh *= Tools.GetRandom(1.0, 1.5);
+				attackHigh *= Tools.GetRandom(1.0, 1.5);
 			}
 			if (role.HasTalent("精明"))
 			{
@@ -1661,7 +1661,7 @@ namespace JyGame
 				}
 				critical_chacne *= Tools.GetRandom(1.0, 1.5);
 				attackLow *= Tools.GetRandom(1.0, 1.3);
-				attckHigh *= Tools.GetRandom(1.0, 1.3);
+				attackHigh *= Tools.GetRandom(1.0, 1.3);
 			}
 			double num16 = role.AttributesFinal["fuyuan"] / 100 - role2.AttributesFinal["dingli"] / 100;
 			if (num16 < 0.0)
@@ -1787,7 +1787,7 @@ namespace JyGame
 					num19 = 10;
 				}
 				attackLow *= (double)(1f + num18 * (float)num19);
-				attckHigh *= (double)(1f + num18 * (float)num19);
+				attackHigh *= (double)(1f + num18 * (float)num19);
 				if (role.HasTalent("大小姐"))
 				{
 					attackResult.AddCastInfo(sourceSprite, new string[3] { "哼！", "你们，不准欺负我！", "谁让你们欺负我的！" }, 0.1f);
@@ -1801,7 +1801,7 @@ namespace JyGame
 			{
 				if ((sprite4.Role.HasTalent("大小姐") || sprite4.Role.HasTalent("自我主义")) && sprite4 != sourceSprite && sprite4.Team == sourceSprite.Team)
 				{
-					attckHigh *= 0.9;
+					attackHigh *= 0.9;
 					attackLow *= 0.9;
 				}
 			}
@@ -1819,11 +1819,11 @@ namespace JyGame
 			{
 				attackResult.AddCastInfo(sourceSprite, new string[2] { "芷若，看我的！", "芷若，我永不会忘记汉江之遇。" }, 0.2f);
 				attackLow *= 1.1;
-				attckHigh *= 1.1;
+				attackHigh *= 1.1;
 			}
 			if (role.HasTalent("臭叫花") && skill.Name.Contains("打狗棒法"))
 			{
-				attckHigh *= 1.2;
+				attackHigh *= 1.2;
 				attackLow *= 1.2;
 				critical_chacne += 0.2;
 				attackResult.AddCastInfo(sourceSprite, new string[2] { "叫花子人穷志不穷！", "这年头叫花子也不好当啊。" }, 0.2f);
@@ -1835,13 +1835,13 @@ namespace JyGame
 			}
 			if (role.HasTalent("金蛇狂舞") && skill.Name.Contains("金蛇剑法"))
 			{
-				attckHigh *= 1.4;
+				attackHigh *= 1.4;
 				attackLow *= 1.4;
 				attackResult.AddCastInfo(sourceSprite, new string[1] { "金蛇狂舞!" }, 0.1f);
 			}
 			if (role.HasTalent("铁骨墨萼") && skill.Name.Contains("连城剑法"))
 			{
-				attckHigh *= 1.4;
+				attackHigh *= 1.4;
 				attackLow *= 1.4;
 				attackResult.AddCastInfo(sourceSprite, new string[4] { "天花落不尽，处处鸟衔飞", "孤鸿海上来，池潢不敢顾", "俯听闻惊风，连山若波涛", "落日照大旗，马鸣风萧萧" }, 0.2f);
 				critical_chacne += 0.2;
@@ -1860,7 +1860,7 @@ namespace JyGame
 			if (role.HasTalent("北冥真气") && role.GetEquippedInternalSkill().Name == "北冥神功")
 			{
 				attackLow *= 1.8;
-				attckHigh *= 1.8;
+				attackHigh *= 1.8;
 			}
 			if (role2.HasTalent("北冥真气") && role2.GetEquippedInternalSkill().Name == "北冥神功")
 			{
@@ -1868,38 +1868,38 @@ namespace JyGame
 			}
 			if (role.HasTalent("老江湖"))
 			{
-				attckHigh *= 0.9;
+				attackHigh *= 0.9;
 				attackLow *= 1.2;
-				if (attackLow > attckHigh)
+				if (attackLow > attackHigh)
 				{
 					double num21 = attackLow;
-					attackLow = attckHigh;
-					attckHigh = num21;
+					attackLow = attackHigh;
+					attackHigh = num21;
 				}
 			}
 			if (role.HasTalent("左手剑"))
 			{
-				attckHigh *= 1.05;
+				attackHigh *= 1.05;
 				attackLow *= 1.05;
 				critical_chacne -= 0.02;
 			}
 			if (role.HasTalent("右臂有伤"))
 			{
-				attckHigh *= 0.95;
+				attackHigh *= 0.95;
 				attackLow *= 0.95;
 			}
 			if (role.HasTalent("神兵"))
 			{
-				attckHigh *= 1.05;
+				attackHigh *= 1.05;
 				attackLow *= 1.05;
 			}
 			if (role.HasTalent("神经病"))
 			{
-				attckHigh *= 1.1;
+				attackHigh *= 1.1;
 			}
 			if (role.HasTalent("鲁莽"))
 			{
-				attckHigh *= 1.06;
+				attackHigh *= 1.06;
 				attackLow *= 1.06;
 			}
 			if (role2.HasTalent("苦命儿"))
@@ -1909,7 +1909,7 @@ namespace JyGame
 			if (role.HasTalent("阴毒") && role2.Sprite.HasBuff("中毒"))
 			{
 				attackLow *= 1.0 + 0.2 * ((double)role.level / 30.0);
-				attckHigh *= 1.0 + 0.2 * ((double)role.level / 30.0);
+				attackHigh *= 1.0 + 0.2 * ((double)role.level / 30.0);
 			}
 			if (role.HasTalent("狗杂种") && Tools.ProbabilityTest(0.3) && (role.GetEquippedInternalSkill().Name == "太玄神功" || role.GetEquippedInternalSkill().Name == "罗汉伏魔功"))
 			{
@@ -1922,12 +1922,12 @@ namespace JyGame
 				defence += 250.0;
 			}
 			attackFormula.attackLow = attackLow;
-			attackFormula.attackUp = attckHigh;
+			attackFormula.attackUp = attackHigh;
 			attackFormula.criticalHit = critical_chacne;
 			attackFormula.defence = defence;
 			LuaManager.Call("AttackLogic_extendTalents3", sourceSprite, targetSprite, skill, bf, attackResult, attackFormula);
 			attackLow = attackFormula.attackLow;
-			attckHigh = attackFormula.attackUp;
+			attackHigh = attackFormula.attackUp;
 			critical_chacne = attackFormula.criticalHit;
 			defence = attackFormula.defence;
 			foreach (Buff buff17 in skill.Buffs)
@@ -1969,14 +1969,14 @@ namespace JyGame
 				{
 				case "attack":
 					attackLow += double.Parse(allTrigger.Argvs[0]) / 2.0;
-					attckHigh += double.Parse(allTrigger.Argvs[0]);
+					attackHigh += double.Parse(allTrigger.Argvs[0]);
 					break;
 				case "powerup_quanzhang":
 					if (skill.Type == 0)
 					{
 						double num27 = 1.0 + (double)int.Parse(allTrigger.Argvs[0]) / 100.0;
 						attackLow *= num27;
-						attckHigh *= num27;
+						attackHigh *= num27;
 					}
 					break;
 				case "powerup_jianfa":
@@ -1984,7 +1984,7 @@ namespace JyGame
 					{
 						double num28 = 1.0 + (double)int.Parse(allTrigger.Argvs[0]) / 100.0;
 						attackLow *= num28;
-						attckHigh *= num28;
+						attackHigh *= num28;
 					}
 					break;
 				case "powerup_daofa":
@@ -1992,7 +1992,7 @@ namespace JyGame
 					{
 						double num26 = 1.0 + (double)int.Parse(allTrigger.Argvs[0]) / 100.0;
 						attackLow *= num26;
-						attckHigh *= num26;
+						attackHigh *= num26;
 					}
 					break;
 				case "powerup_qimen":
@@ -2000,7 +2000,7 @@ namespace JyGame
 					{
 						double num25 = 1.0 + (double)int.Parse(allTrigger.Argvs[0]) / 100.0;
 						attackLow *= num25;
-						attckHigh *= num25;
+						attackHigh *= num25;
 					}
 					break;
 				case "critical":
@@ -2035,7 +2035,7 @@ namespace JyGame
 					}
 					if (flag)
 					{
-						attckHigh *= 0.9;
+						attackHigh *= 0.9;
 						attackLow *= 0.9;
 					}
 					break;
@@ -2060,28 +2060,28 @@ namespace JyGame
 			if (buff11 != null)
 			{
 				attackLow *= 1.0 + (double)buff11.Level / 10.0;
-				attckHigh *= 1.0 + (double)buff11.Level / 10.0;
+				attackHigh *= 1.0 + (double)buff11.Level / 10.0;
 			}
 			if (buff12 != null)
 			{
 				attackLow *= 1.0 - (double)buff12.Level / 10.0;
-				attckHigh *= 1.0 - (double)buff12.Level / 10.0;
+				attackHigh *= 1.0 - (double)buff12.Level / 10.0;
 			}
 			BuffInstance buff13 = targetSprite.GetBuff("伤害加深");
 			if (buff13 != null)
 			{
 				attackLow *= Math.Pow(1.15, buff13.Level);
-				attckHigh *= Math.Pow(1.15, buff13.Level);
+				attackHigh *= Math.Pow(1.15, buff13.Level);
 			}
 			if (RuntimeData.Instance.GameMode == "normal" && sourceSprite.Team == 1)
 			{
 				attackLow *= 2.0;
-				attckHigh *= 2.0;
+				attackHigh *= 2.0;
 			}
 			if (RuntimeData.Instance.GameMode == "normal" && sourceSprite.Team != 1)
 			{
 				attackLow *= 0.5;
-				attckHigh *= 0.5;
+				attackHigh *= 0.5;
 			}
 			BuffInstance buff14 = targetSprite.GetBuff("防御强化");
 			if (buff14 != null)
@@ -2100,7 +2100,7 @@ namespace JyGame
 			{
 				flag2 = false;
 			}
-			attackResult.Hp = (int)(Tools.GetRandom(attackLow, attckHigh) * ((!flag2) ? 1.0 : num24) * (1.0 - num29));
+			attackResult.Hp = (int)(Tools.GetRandom(attackLow, attackHigh) * ((!flag2) ? 1.0 : num24) * (1.0 - num29));
 			if (role2.HasTalent("乾坤大挪移奥义"))
 			{
 				attackResult.Hp = (int)((double)attackResult.Hp * 0.5);
