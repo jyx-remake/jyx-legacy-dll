@@ -496,7 +496,7 @@ namespace JyGame
 					}
 					Log(source.Role.Name + "天赋【铁剑掌门】发动，增加攻击力");
 				}
-				if (source.Role.HasTalent("射雕英雄") && (skill.Name.Contains("降龙十八掌") || skill.Name.Contains("打狗棒法") || skill.Name.Contains("九阴真经")))
+				if (source.Role.HasTalent("射雕英雄") && (skill.Name.Contains("降龙十八掌") || skill.Name.Contains("打狗棒法") || skill.Name.Contains("九阴神功")))
 				{
 					string[] array6 = new string[3] { "蓉儿，看我的!", "侠之大者，为国为民", "呵！！" };
 					attackResult.AddCastInfo(source, array6[Tools.GetRandomInt(0, array6.Length) % array6.Length], 0.5f);
@@ -506,7 +506,7 @@ namespace JyGame
 					}
 					Log(source.Role.Name + "天赋【射雕英雄】发动，增加攻击力");
 				}
-				if (source.Role.HasTalent("玲珑璇玑") && (skill.Name.Contains("打狗棒法") || skill.Name.Contains("九阴真经")))
+				if (source.Role.HasTalent("玲珑璇玑") && (skill.Name.Contains("打狗棒法") || skill.Name.Contains("九阴神功")))
 				{
 					string[] array7 = new string[1] { "靖哥哥，看我的!" };
 					attackResult.AddCastInfo(source, array7[Tools.GetRandomInt(0, array7.Length) % array7.Length], 0.35f);
